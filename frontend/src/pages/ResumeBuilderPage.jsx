@@ -1,17 +1,18 @@
 import React from "react";
 
-const ResumeBuilderPage = () => {
+const ResumeBuilder = () => {
   return (
     <div style={{ height: "100vh" }}>
       <iframe
         src="http://localhost:8501"
-        title="Streamlit Resume Builder"
+        title="Resume Builder"
         width="100%"
         height="100%"
         frameBorder="0"
+        allowFullScreen
       ></iframe>
     </div>
   );
 };
 
-export default ResumeBuilderPage;
+export default ResumeBuilder;

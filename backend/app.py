@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from resume.resume_generator import generate_resume  # your async function
 
-st.set_page_config(page_title="SnapSkill - Resume Builder", layout="centered")
+st.set_page_config(page_title="SnapSkill - Resume Builder", layout="wide")
 st.markdown("""
     <style>
     /* SnapSkill Light Theme - Final Fix */

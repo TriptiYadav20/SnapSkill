@@ -1,42 +1,59 @@
-.enhancer-page {
+/* File: src/styles/ResumeEnhancer.css */
+.enhancer-container {
+  display: flex;
+  justify-content: space-between;
   padding: 2rem;
-  background: linear-gradient(to right, #e0f7fa, #fce4ec);
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  background: #f9f9ff;
+  border-radius: 10px;
+  margin-top: 3rem;
 }
 
-.upload-label {
-  display: inline-block;
-  padding: 10px 18px;
-  background: #4fc3f7;
-  color: #fff;
-  border-radius: 8px;
+.enhancer-left {
+  flex: 1;
+  max-width: 45%;
+}
+
+.enhancer-upload {
+  border: 2px dashed #8e44ad;
+  padding: 0.8rem 1.5rem;
+  margin: 1rem 0;
   cursor: pointer;
-  font-weight: 600;
+  display: inline-block;
+  color: #8e44ad;
+  border-radius: 8px;
   transition: 0.3s ease;
 }
 
-.upload-label:hover {
-  background: #0288d1;
+.enhancer-upload:hover {
+  background-color: #f3e8ff;
 }
 
-.result-box {
-  margin-top: 1.5rem;
+.suggestion-box {
+  margin-top: 1rem;
   background: #fff;
   padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.07);
-}
-
-ul li {
-  margin: 0.5rem 0;
-}
-
-.enhanced-preview {
-  white-space: pre-wrap;
-  background: #f9f9f9;
-  padding: 1rem;
   border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.download-btn {
+  display: inline-block;
   margin-top: 1rem;
-  font-family: monospace;
+  padding: 0.5rem 1rem;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.enhancer-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.enhancer-right img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
 }

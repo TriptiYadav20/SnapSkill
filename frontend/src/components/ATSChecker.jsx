@@ -1,11 +1,14 @@
-
+// File: src/components/ATSChecker.jsx
 import React, { useState } from "react";
 import "../styles/ATSChecker.css";
+import atsImage from "../assets/ATSUI.webp";
+import { CloudUpload, CheckCircle, XCircle } from "lucide-react";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const ATSChecker = () => {
   const [score, setScore] = useState(null);
   const [resume, setResume] = useState(null);
-  const [suggestions, setSuggestions] = useState([]);
   const [keywords, setKeywords] = useState({ matched: [], missing: [] });
 
   const handleUpload = async (e) => {
@@ -18,57 +21,80 @@ const ATSChecker = () => {
       method: "POST",
       body: formData,
     });
+
     const data = await res.json();
-    setScore(data.ats_score);
-    setSuggestions(data.suggestions || []);
-    setKeywords({ matched: data.matched_keywords, missing: data.missing_keywords });
+    setScore(data.score);
+    setKeywords({
+      matched: data.matched_keywords,
+      missing: data.missing_keywords,
+    });
+  };
+
+  const getScoreColor = (value) => {
+    if (value >= 80) return "#28a745";
+    if (value >= 50) return "#ffc107";
+    return "#dc3545";
   };
 
   return (
-    <div className="ats-page">
-      <h2>ATS Resume Checker</h2>
-      <p>Upload your resume and see how well it matches the job description</p>
+    <div className="ats-wrapper">
+      <div className="ats-left">
+        <h1>Is Your Resume ATS-Friendly?</h1>
+        <p>
+          Upload your resume to evaluate how well it matches an ideal job
+          description and receive AI-powered tips to enhance it.
+        </p>
 
-      <label className="upload-label">
-        <input type="file" accept=".pdf" onChange={handleUpload} />
-        Choose Resume PDF
-      </label>
+        <label className="upload-label">
+          <CloudUpload style={{ marginRight: "10px", verticalAlign: "middle" }} />
+          Upload Your Resume
+          <input type="file" accept=".pdf" onChange={handleUpload} hidden />
+        </label>
 
-      {score && (
-        <div className="result-box">
-          <div className="score-ring">
-            <span>{score}%</span>
-          </div>
-
-          <div className="keywords-box">
-            <div>
-              <h4>✅ Matched Keywords</h4>
-              <div className="chips green">
-                {keywords.matched.map((word, i) => (
-                  <span key={i}>{word}</span>
-                ))}
-              </div>
+        {score !== null && (
+          <div className="score-preview">
+            <div style={{ width: 100, height: 100 }}>
+              <CircularProgressbar
+                value={score}
+                text={`${score}%`}
+                styles={buildStyles({
+                  pathColor: getScoreColor(score),
+                  textColor: "#333",
+                  trailColor: "#eee",
+                  textSize: "18px",
+                })}
+              />
             </div>
-            <div>
-              <h4>❌ Missing Keywords</h4>
-              <div className="chips red">
-                {keywords.missing.map((word, i) => (
-                  <span key={i}>{word}</span>
-                ))}
-              </div>
-            </div>
+            <p className="score-label">Match Score</p>
           </div>
+        )}
 
-          <div className="tips">
-            <h4>🔧 Suggestions to Improve:</h4>
-            <ul>
-              {suggestions.map((tip, i) => (
-                <li key={i}>{tip}</li>
+        {keywords.matched.length > 0 && (
+          <div className="keyword-section">
+            <h3><CheckCircle color="#28a745" size={20} style={{ marginRight: 5 }} /> Matched Keywords</h3>
+            <div className="keyword-chips green">
+              {keywords.matched.map((word, idx) => (
+                <span key={idx}>{word}</span>
               ))}
-            </ul>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+
+        {keywords.missing.length > 0 && (
+          <div className="keyword-section">
+            <h3><XCircle color="#dc3545" size={20} style={{ marginRight: 5 }} /> Missing Keywords</h3>
+            <div className="keyword-chips red">
+              {keywords.missing.map((word, idx) => (
+                <span key={idx}>{word}</span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="ats-right">
+        <img src={atsImage} alt="Resume Visual" />
+      </div>
     </div>
   );
 };
