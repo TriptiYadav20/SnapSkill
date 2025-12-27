@@ -73,26 +73,22 @@ SnapSkill/
 
 ##  How to Run the Project
 
-1. **Clone the repository**
 
-git clone https://github.com/Vartekalohiya13/SnapSkill.git
-
-
-2. **Navigate to the project directory**
+1. **Navigate to the project directory**
 
 cd SnapSkill
 
-3. **Install dependencies**
+2. **Install dependencies**
 
 npm install
 
 
-4. **Start the application**
+3. **Start the application**
 
 npm start
 
 
-5. Open your browser and visit:
+4. Open your browser and visit:
 
 http://localhost:3000
 
