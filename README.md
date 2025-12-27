@@ -53,9 +53,9 @@ It can be used by:
 
 
 
-##  Project Structure
+## 📂 Project Structure
 
-
+```
 SnapSkill/
 │
 ├── public/          # Static files
@@ -67,6 +67,14 @@ SnapSkill/
 ├── assets/          # Images & icons
 ├── README.md        # Project documentation
 └── package.json     # Dependencies
+```
+
+---
+
+
+---
+
+
 
 
 
